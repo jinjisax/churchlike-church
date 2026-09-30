@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>소식 · 블로그 | 또 하나의 교회다운 교회</title>
+<meta name="description" content="교회 소식과 공지, 네이버 블로그 카테고리, 갤러리와 유튜브 채널 안내.">
+<meta name="theme-color" content="#7B5EA7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M62 12a40 40 0 1 0 6 76 33 33 0 1 1-6-76z' fill='%237B5EA7'/%3E%3Cpath d='M79 6l3.6 9.4L92 19l-9.4 3.6L79 32l-3.6-9.4L66 19l9.4-3.6z' fill='%237B5EA7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header__inner">
+    <a class="brand" href="index.html">
+      <span data-logo></span>
+      <span class="brand__txt">
+        <b class="brand__ko"><small>또 하나의</small>교회다운 교회</b>
+        <span class="brand__en">CHURCHLIKE CHURCH</span>
+      </span>
+    </a>
+    <nav class="nav" data-nav aria-label="주메뉴"></nav>
+    <a class="btn btn--yt btn--sm header__cta" data-link="youtube.subscribeUrl">유튜브 구독</a>
+    <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="drawer">
+  <nav data-drawer-nav aria-label="모바일 메뉴"></nav>
+  <div class="drawer__foot">
+    <a class="btn btn--yt" data-link="youtube.channelUrl">유튜브 채널</a>
+    <a class="btn btn--ghost" data-link="channels.blog">블로그</a>
+    <a class="btn btn--ghost" href="visit.html#location">오시는 길</a>
+  </div>
+</div>
+
+<main>
+
+<section class="pagehead">
+  <div class="wrap">
+    <p class="crumb"><a href="index.html">홈</a> · 소식 · 블로그</p>
+    <h1 class="h1">교회의 오늘을 기록합니다</h1>
+    <p class="lead">공지와 소식은 이곳에서, 더 자세한 이야기와 사진은 블로그와 유튜브에서 만나보세요.</p>
+  </div>
+</section>
+
+<!-- 소식 -->
+<section class="section" id="notice">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Notice · 교회 소식</span>
+      <h2 class="h2">공지 &amp; 소식</h2>
+    </div>
+    <div data-render="news" data-reveal></div>
+  </div>
+</section>
+
+<!-- 블로그 카테고리 -->
+<section class="section section--paper" id="blog">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Naver Blog · 블로그</span>
+      <h2 class="h2">블로그 카테고리</h2>
+      <p class="lead">주일 말씀 요약, 목양 칼럼, 주보와 사진첩까지.
+        관심 있는 카테고리를 눌러 바로 이동하세요.</p>
+    </div>
+    <div class="grid g-3" data-render="blogCategories"></div>
+    <div style="margin-top:30px" data-reveal>
+      <a class="btn" data-link="channels.blog">네이버 블로그 전체보기</a>
+    </div>
+  </div>
+</section>
+
+<!-- 유튜브 -->
+<section class="section section--night" id="youtube">
+  <div class="wrap">
+    <div class="split">
+      <div data-reveal>
+        <span class="eyebrow">YouTube · 유튜브</span>
+        <h2 class="h2">영상으로 만나는<br>교회의 일상</h2>
+        <p class="lead" style="margin-top:18px">예배 실황과 설교, 찬양과 교회의 일상까지
+          800여 편의 영상이 쌓여 있습니다. 구독하고 알림을 켜두시면
+          새 영상이 올라올 때 가장 먼저 만나보실 수 있습니다.</p>
+        <div class="ytstats" style="margin-top:26px">
+          <div class="ytstat"><b>매주</b><span>새 설교 · 쇼츠</span></div>
+          <div class="ytstat"><b data-site="youtube.handle">@교회다운교회</b><span>채널 핸들</span></div>
+        </div>
+        <a class="btn btn--yt" style="margin-top:26px" data-link="youtube.subscribeUrl">채널 구독하기</a>
+      </div>
+      <div data-reveal data-d="1">
+        <div data-yt="list:UULVn4InU2hoegEq9QWLeyi6MA" data-tag="최신 예배" data-btn="예배 영상 보기"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 갤러리 -->
+<section class="section" id="gallery">
+  <div class="wrap wrap-wide">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Gallery · 갤러리</span>
+      <h2 class="h2">사진으로 보는 우리</h2>
+    </div>
+    <div class="gallery" data-reveal>
+      <div><div data-img="gallery-1"></div></div>
+      <div><div data-img="gallery-2"></div></div>
+      <div><div data-img="gallery-3"></div></div>
+      <div><div data-img="gallery-4"></div></div>
+      <div><div data-img="gallery-5"></div></div>
+      <div><a class="gallery__more" data-link="channels.blog">
+        <span>사진 더 보기</span><b>블로그 사진첩 →</b>
+      </a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 온라인 채널 -->
+<section class="section section--paper" id="channels">
+  <div class="wrap">
+    <div class="section-head section-head--center" data-reveal>
+      <span class="eyebrow">Channels · 온라인에서 만나요</span>
+      <h2 class="h2">어디서든 연결될 수 있습니다</h2>
+    </div>
+    <div style="display:flex; justify-content:center" data-reveal>
+      <div class="footer__sns" style="margin:0" data-render="sns"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" data-footer></footer>
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

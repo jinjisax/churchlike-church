@@ -88,10 +88,54 @@
 
       el.innerHTML = ph; // 로딩 중에는 안내 박스
       loadAnyExt((el.getAttribute("data-base") || "") + cfg.file, function (img) {
+        if (el.classList.contains("imgslot--blog")) return; // 블로그 사진이 먼저 들어왔으면 그대로 둠
         img.alt = cfg.label || "";
         el.innerHTML = ""; el.appendChild(img);
       });
     });
+  }
+
+  /* 휴대폰에서는 네이버 블로그 링크를 모바일 주소로 바꿉니다.
+     (blog.naver.com 은 폰에서 m.blog 로 다시 보내는 스크립트만 주는데, 카카오톡 등 앱 안 브라우저에서 막히는 경우가 있음) */
+  var IS_MOBILE = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+  function fixNaverLinks(root) {
+    if (!IS_MOBILE) return;
+    $$('a[href*="//blog.naver.com/"]', root).forEach(function (a) {
+      a.href = a.getAttribute("href").replace(/^https?:\/\/blog\.naver\.com\//, "https://m.blog.naver.com/");
+    });
+  }
+
+  /* 갤러리: 네이버 블로그 "교회사진첩" 최신 사진으로 채웁니다.
+     assets/data/blog-gallery.json 은 GitHub Actions가 3시간마다 갱신합니다 (.github/workflows/blog-gallery.yml).
+     목록이 없거나 사진이 모자라면 원래 gallery-N 사진이 그대로 보입니다. */
+  function renderBlogGallery() {
+    if (!$$('.gallery [data-img^="gallery-"]').length || !window.fetch) return;
+    fetch("assets/data/blog-gallery.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.photos || !d.photos.length) return;
+        $$(".gallery").forEach(function (g) {
+          $$('[data-img^="gallery-"]', g).forEach(function (el, i) {
+            var p = d.photos[i];
+            if (!p) return;
+            var img = new Image();
+            img.decoding = "async";
+            img.referrerPolicy = "no-referrer";
+            img.alt = p.title ? p.title + " · " + p.date : "교회 사진첩";
+            img.onload = function () {
+              el.classList.add("imgslot--blog");
+              el.innerHTML = "";
+              var a = document.createElement("a");
+              a.href = p.post; a.target = "_blank"; a.rel = "noopener"; a.title = img.alt;
+              a.appendChild(img);
+              el.appendChild(a);
+              fixNaverLinks(el);
+            };
+            img.src = p.src;
+          });
+        });
+      })
+      .catch(function () {});
   }
 
   /* 확장자가 달라도 찾아줍니다: hero.jpg 가 없으면 hero.jpeg / .png / .webp / .jfif 순으로 시도 */
@@ -524,7 +568,7 @@
       host.innerHTML = S.values.map(function (v, i) {
         return '<article class="value" data-reveal data-d="' + (i + 1) + '">' +
           '<span class="value__no">' + esc(v.no) + "</span>" +
-          '<div class="value__body"><h3 class="value__title">' + esc(v.title) + "</h3>" +
+          '<div class="value__body"><h3 class="value__title">' + esc(v.title).replace(/\n/g, "<br>") + "</h3>" +
           '<p class="value__desc">' + esc(v.desc) + "</p></div></article>";
       }).join("");
     },
@@ -763,6 +807,7 @@
     renderLogos();
     renderLists();
     renderImages();
+    renderBlogGallery();
     buildMainPlayer();
     buildShorts();
     buildSermonTabs();
@@ -771,6 +816,7 @@
     buildModal();
     reveal();
     bindAnchors();
+    fixNaverLinks();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

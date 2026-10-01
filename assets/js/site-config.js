@@ -21,7 +21,7 @@ const SITE = {
     addressShort:"관악구 남부순환로 2036, 2층",
     mapQuery:    "서울특별시 관악구 남부순환로 2036",   // 지도 검색용 주소 (층수 없이)
     phone:       "",                       // ⚠︎ 교회 대표번호 (예: "02-000-0000") — 비워두면 표시되지 않습니다
-    email:       "miyoungpower@hanmail.net",
+    email:       "clchurch2024@gmail.com",
     // 지도 링크 (주소로 자동 검색됩니다. 정확한 장소 링크가 있으면 교체하세요)
     naverMap:    "https://map.naver.com/p/search/서울특별시 관악구 남부순환로 2036",
     kakaoMap:    "https://map.kakao.com/?q=서울특별시 관악구 남부순환로 2036",
@@ -59,7 +59,7 @@ const SITE = {
        유튜브에서 재생목록을 만들고 주소창의 list= 뒤 값을 붙여넣으세요.
        playlistId 를 비워두면 '라이브 예배 영상'이 최신순으로 재생됩니다. */
     categories: [
-      { key: "sunday",  label: "주일예배",   desc: "주일 대예배 실황 전체 영상",       playlistId: "" },
+      { key: "sunday",  label: "주일예배",   desc: "주일예배 실황 전체 영상",       playlistId: "" },
       { key: "word",    label: "수요·금요",  desc: "수요예배와 금요기도회 말씀",       playlistId: "" },
       { key: "praise",  label: "찬양·워십",  desc: "찬양팀 워십과 특송",               playlistId: "" },
       { key: "next",    label: "다음세대",   desc: "주일학교·청년부 영상",             playlistId: "" }
@@ -79,6 +79,8 @@ const SITE = {
      --------------------------------------------------------------- */
   channels: {
     blog:      "https://blog.naver.com/clchurch_",
+    blogNotice: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=25",   // 공지사항 (교회 소식 버튼)
+    blogPhotos: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=26",   // 교회사진첩 (갤러리 "더 보기")
     instagram: "",     // ⚠︎ 인스타그램 개설 후 주소 입력 (전략보고서 최우선 과제)
     kakao:     "",     // ⚠︎ 카카오톡 채널 개설 후 주소 입력
     facebook:  "",
@@ -89,12 +91,13 @@ const SITE = {
      4. 예배 시간   ⚠︎ 실제 시간으로 반드시 확인·수정해 주세요
      --------------------------------------------------------------- */
   services: [
-    { name: "주일 대예배",   time: "주일 오전 11:00", place: "2층 본당",   note: "유튜브 생중계 · 예배 후 교제" },
-    { name: "주일 오후예배", time: "주일 오후 1:30",  place: "2층 본당",   note: "말씀 나눔과 소그룹" },
-    { name: "수요예배",      time: "수요일 오후 8:00", place: "2층 본당",   note: "" },
-    { name: "금요기도회",    time: "금요일 오후 9:00", place: "2층 본당",   note: "찬양과 통성기도" },
-    { name: "새벽기도회",    time: "화~토 오전 6:00",  place: "2층 본당",   note: "" },
-    { name: "다음세대 예배",  time: "주일 오전 11:00", place: "교육실",     note: "영·유아부 ~ 중고등부" }
+    { name: "주일 1부 예배",  time: "주일 오전 9:00",   place: "2층 본당",   note: "" },
+    { name: "주일 2부 예배",  time: "주일 오전 11:00",  place: "2층 본당",   note: "유튜브 생중계 · 예배 후 교제" },
+    { name: "주일 오후예배",  time: "주일 오후 1:30",   place: "2층 본당",   note: "말씀 나눔과 소그룹" },
+    { name: "다음세대 예배",  time: "주일 오전 10:40",  place: "교육실",     note: "영·유아부 ~ 중고등부" },
+    { name: "수요예배",       time: "수요일 오후 7:30", place: "2층 본당",   note: "" },
+    { name: "금요기도회",     time: "금요일 오후 7:30", place: "2층 본당",   note: "찬양과 통성기도" },
+    { name: "새벽기도회",     time: "월~금 오전 5:30",  place: "2층 본당",   note: "" }
   ],
 
   /* ---------------------------------------------------------------
@@ -109,7 +112,7 @@ const SITE = {
     tagline: "말씀 앞에서는 단호하게,\n사람 앞에서는 따뜻하게",
     credentials: [
       "기독교교육학 박사 (Ph.D.)",
-      "순복음 제천신학교 강사",
+      "순복음총회신학교 교수",
       "기하성 교단 목사",
       "순복음 청년 사역 베테랑"
     ],
@@ -117,7 +120,7 @@ const SITE = {
        {중괄호} 로 감싼 말은 줄이 바뀔 때 중간에서 끊기지 않습니다. */
     bio: [
       { label: "청년 사역", text: "정통 순복음 교회에서 오랜 세월 {청년들과 함께} 걸어왔습니다. 수많은 청년이 그 곁에서 {신앙의 첫걸음}을 떼고 {삶의 방향}을 찾았습니다." },
-      { label: "신학 교육", text: "{기독교교육학 박사}로서 {순복음 제천신학교} 강단에 서서 다음 세대 사역자를 길러내고, 그 배움을 교회 현장에 녹여냅니다." },
+      { label: "신학 교육", text: "{기독교교육학 박사}이자 {순복음총회신학교} 교수로서 다음 세대 사역자를 길러내고, 그 배움을 교회 현장에 녹여냅니다." },
       { label: "목회",     text: "나이보다 훨씬 젊은 감각으로 {청년들의 언어}를 이해하는 리더십. 그것이 {또 하나의 교회다운 교회}가 서 있는 자리입니다." }
     ]
   },
@@ -126,26 +129,24 @@ const SITE = {
      6. 핵심가치 (유튜브 채널 소개글 기준)
      --------------------------------------------------------------- */
   values: [
-    { no: "01", title: "올바로 사랑하고 예배하는 교회",  desc: "형식이 아니라 본질에 집중합니다. 하나님을 올바로 알고, 올바로 사랑하고, 마음을 다해 예배합니다." },
-    { no: "02", title: "세상을 존중하고 섬기는 교회",    desc: "하나님이 만드신 세상과 사람을 존중합니다. 가르치려 하기 전에 먼저 듣고, 판단하기 전에 먼저 곁에 섭니다." },
-    { no: "03", title: "열방에 복을 흘려보내는 교회",    desc: "받은 은혜를 가두지 않습니다. 이웃에게, 지역에게, 열방에게 하나님이 주신 복을 흘려보냅니다." }
+    { no: "01", title: "하나님을 올바로 사랑하고\n예배하는 교회",  desc: "형식이 아니라 본질에 집중합니다. 하나님을 올바로 알고, 올바로 사랑하고, 마음을 다해 예배합니다." },
+    { no: "02", title: "하나님이 만드신 세상을 존중하고 섬기는 교회",    desc: "하나님이 만드신 세상과 사람을 존중합니다. 가르치려 하기 전에 먼저 듣고, 판단하기 전에 먼저 곁에 섭니다." },
+    { no: "03", title: "하나님이 주신 복을 열방에 흘려보내는 교회",    desc: "받은 은혜를 가두지 않습니다. 이웃에게, 지역에게, 열방에게 하나님이 주신 복을 흘려보냅니다." }
   ],
 
   /* ---------------------------------------------------------------
-     7. 블로그 카테고리   ⚠︎ 실제 네이버 블로그 카테고리에 맞게 수정하세요
+     7. 블로그 카테고리   (네이버 블로그 clchurch_ 의 실제 카테고리, categoryNo = 카테고리 번호)
         (각 카테고리를 블로그에서 연 뒤 주소창 주소를 url 에 붙여넣으면
          해당 카테고리로 바로 이동합니다. 비워두면 블로그 홈으로 갑니다.)
      --------------------------------------------------------------- */
   blogCategories: [
-    { icon: "book",    name: "주일예배 말씀",   desc: "주일 강단에서 선포된 말씀 요약",       url: "" },
-    { icon: "pen",     name: "목양 칼럼",       desc: "담임목사가 전하는 주중의 편지",        url: "" },
-    { icon: "bell",    name: "교회 소식·공지",  desc: "행사 안내와 교회의 크고 작은 소식",    url: "" },
-    { icon: "paper",   name: "주보",            desc: "주간 예배 순서와 광고",                url: "" },
-    { icon: "camera",  name: "사진첩",          desc: "예배와 행사의 순간들",                 url: "" },
-    { icon: "spark",   name: "청년부 이야기",   desc: "청년 모임과 소그룹 나눔",              url: "" },
-    { icon: "heart",   name: "다음세대",        desc: "주일학교와 아이들의 이야기",           url: "" },
-    { icon: "pray",    name: "기도 제목",       desc: "함께 기도하며 응답을 나눕니다",        url: "" },
-    { icon: "globe",   name: "선교와 나눔",     desc: "이웃과 열방을 향한 발걸음",            url: "" }
+    { icon: "book",    name: "Happy Sunday",     desc: "설교와 찬양 · 주일의 은혜를 나눕니다",      url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=10" },
+    { icon: "play",    name: "1분설교",          desc: "설교와 찬양 · 짧게 듣는 1분 말씀",          url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=11" },
+    { icon: "pen",     name: "말씀이 시가 되어", desc: "설교와 찬양 · 말씀을 시로 담았습니다",      url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=23" },
+    { icon: "camera",  name: "교회일상",         desc: "교회소식 · 교회의 크고 작은 일상",          url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=14" },
+    { icon: "globe",   name: "전도·선교",        desc: "교회소식 · 이웃과 열방을 향한 발걸음",      url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=15" },
+    { icon: "users",   name: "지역사회활동",     desc: "교회소식 · 지역과 함께하는 활동",           url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=16" },
+    { icon: "heart",   name: "교회학교",         desc: "교회소식 · 주일학교 아이들의 이야기",       url: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=19" }
   ],
 
   /* ---------------------------------------------------------------
@@ -169,6 +170,8 @@ const SITE = {
     "worship-2":{ file: "assets/img/worship-2.jpg",   label: "예배 사진 2",            hint: "회중 예배 장면 · 1600×1000" },
     "worship-3":{ file: "assets/img/worship-3.jpg",   label: "예배 사진 3",            hint: "말씀 선포 장면 · 1600×1000" },
     "pastor":   { file: "assets/img/pastor.jpg",      label: "담임목사 사진",          hint: "세로 인물 사진 · 900×1200" },
+    "pastor-card": { file: "assets/img/pastor-card.jpg", label: "담임목사 사진 (섬기는 사람들 카드용)", hint: "얼굴 위주로 자른 세로 사진 · 4:5" },
+    "jinsol":   { file: "assets/img/jinsol.jpg",      label: "김진솔 전도사 사진",     hint: "세로 인물 사진 · 900×1200" },
     "youth-1":  { file: "assets/img/youth-1.jpg",     label: "청년부 사진",            hint: "청년 모임 장면 · 1600×1000" },
     "kids-1":   { file: "assets/img/kids-1.jpg",      label: "다음세대 사진",          hint: "주일학교 아이들 · 1600×1000" },
     "space-1":  { file: "assets/img/space-1.jpg",     label: "공유공간 이미지",        hint: "라운지/카페 분위기 · 1600×1000" },

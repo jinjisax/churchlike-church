@@ -80,6 +80,7 @@ const SITE = {
   channels: {
     blog:      "https://blog.naver.com/clchurch_",
     blogNotice: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=25",   // 공지사항 (교회 소식 버튼)
+    blogSchool: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=19",   // 교회학교 (공동체 "아이들 이야기 보러 가기")
     blogPhotos: "https://blog.naver.com/PostList.naver?blogId=clchurch_&categoryNo=26",   // 교회사진첩 (갤러리 "더 보기")
     instagram: "",     // ⚠︎ 인스타그램 개설 후 주소 입력 (전략보고서 최우선 과제)
     kakao:     "",     // ⚠︎ 카카오톡 채널 개설 후 주소 입력

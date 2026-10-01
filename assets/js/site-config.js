@@ -48,6 +48,8 @@ const SITE = {
     livePlaylist:    "UULVn4InU2hoegEq9QWLeyi6MA",
     sermonPlaylist:  "UULFn4InU2hoegEq9QWLeyi6MA",
     shortsPlaylist:  "UUSHn4InU2hoegEq9QWLeyi6MA",
+    // 메인 "최신 예배"에 걸 재생목록: 주일예배_누가복음 (바꾸면 scripts/update_youtube_latest.py 의 PLAYLIST_ID 도 같이)
+    mainPlaylist:    "PLFwFWUoH594zqYZOTIbEwqXcnjVgAmYw4",
 
     /* 쇼츠 목록을 가져오는 무료 변환 서비스 (유튜브 RSS → JSON).
        쇼츠 목록을 못 불러오면 '쇼츠 재생목록 플레이어' 한 칸으로 자동 대체됩니다. */
@@ -58,11 +60,9 @@ const SITE = {
     /* 설교 페이지 탭별 재생목록 (선택)
        유튜브에서 재생목록을 만들고 주소창의 list= 뒤 값을 붙여넣으세요.
        playlistId 를 비워두면 '라이브 예배 영상'이 최신순으로 재생됩니다. */
+    //  latest: true  → 유튜브 '라이브' 탭 맨 위 영상(가장 최근 예배)을 자동으로 보여줍니다
     categories: [
-      { key: "sunday",  label: "주일예배",   desc: "주일예배 실황 전체 영상",       playlistId: "" },
-      { key: "word",    label: "수요·금요",  desc: "수요예배와 금요기도회 말씀",       playlistId: "" },
-      { key: "praise",  label: "찬양·워십",  desc: "찬양팀 워십과 특송",               playlistId: "" },
-      { key: "next",    label: "다음세대",   desc: "주일학교·청년부 영상",             playlistId: "" }
+      { key: "latest",  label: "최근 예배",  desc: "가장 최근에 드린 예배 영상입니다", playlistId: "", latest: true }
     ],
 
     /* ★ 메인 플레이어에 고정할 영상 (선택)

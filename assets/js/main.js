@@ -336,6 +336,10 @@
       wrap.appendChild(makeIframe(opts.videoId ? YT.embedVideo(opts.videoId) : YT.embedList(opts.listId), label));
     });
 
+    if (opts.videoId && opts.captionText) {
+      $(".ytfacade", wrap).insertAdjacentHTML("beforeend", '<span class="ytwrap__cap">' + esc(opts.captionText) + "</span>");
+    }
+
     // 재생목록이면 최신 영상 썸네일(+제목)을 받아와 깔아줍니다
     if (!opts.videoId && opts.listId) {
       playlistPoster(opts.listId, function (info) {
@@ -381,16 +385,40 @@
     return y.livePlaylist || y.sermonPlaylist || y.uploadsPlaylist;
   }
 
-  /* 메인 플레이어 — 유튜브 '라이브' 탭의 가장 최근 예배 */
+  /* 메인 플레이어 — "주일예배_누가복음" 재생목록의 가장 최근 주일예배
+     assets/data/youtube-latest.json (GitHub Actions가 10분마다 기록)을 먼저 쓰고,
+     없으면 유튜브 재생목록(youtube.mainPlaylist) 대표 영상으로 대신합니다. */
   function buildMainPlayer() {
     var stage = $("[data-yt-player]");
     if (!stage) return;
     var y = S.youtube;
     var first = (y.featured || []).filter(function (v) { return v && v.id; })[0];
-    facade(stage, first
-      ? { videoId: first.id, tag: first.badge || "추천 설교", btn: "설교 영상 보기", label: first.title }
-      : { listId: worshipList(), tag: "최신 예배", btn: "예배 영상 보기",
-          label: "최신 예배 영상", caption: true });
+    if (first) {
+      facade(stage, { videoId: first.id, tag: first.badge || "추천 설교", btn: "설교 영상 보기", label: first.title });
+      return;
+    }
+    loadLatest(function (d) {
+      if (d && d.id) {
+        facade(stage, { videoId: d.id, tag: "최신 예배", btn: "예배 영상 보기",
+                        label: d.title || "최신 예배 영상", captionText: d.title });
+      } else {
+        facade(stage, { listId: y.mainPlaylist || worshipList(), tag: "최신 예배", btn: "예배 영상 보기",
+                        label: "최신 예배 영상", caption: true });
+      }
+    });
+  }
+
+  /* assets/data/youtube-latest.json 을 한 번만 읽어 나눠 씁니다 (못 읽으면 null) */
+  var latestReq = null;
+  function loadLatest(cb) {
+    if (!latestReq) {
+      latestReq = window.fetch
+        ? fetch("assets/data/youtube-latest.json", { cache: "no-cache" })
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .catch(function () { return null; })
+        : { then: function (f) { f(null); } };
+    }
+    latestReq.then(cb);
   }
 
   /* ----------------------------------------------------------------
@@ -403,7 +431,20 @@
     '<rect x="5" y="1.5" width="14" height="21" rx="4.5" fill="#FF0033"/>' +
     '<path d="M10 8.3v7.4l6-3.7z" fill="#fff"/></svg>';
 
+  /* 쇼츠 목록: assets/data/youtube-shorts.json (GitHub Actions가 10분마다 채널 쇼츠 탭에서 기록)을 먼저 쓰고,
+     없으면 예전 방식(유튜브 RSS → 변환 서비스)으로 시도합니다. */
   function loadShorts(cb) {
+    if (!window.fetch) { loadShortsFeed(cb); return; }
+    fetch("assets/data/youtube-shorts.json", { cache: "no-cache" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (d && d.items && d.items.length) cb(d.items);
+        else loadShortsFeed(cb);
+      })
+      .catch(function () { loadShortsFeed(cb); });
+  }
+
+  function loadShortsFeed(cb) {
     var y = S.youtube;
     try {
       var c = JSON.parse(localStorage.getItem(SHORTS_KEY) || "null");
@@ -531,13 +572,24 @@
 
     function show(i) {
       var c = cats[i]; if (!c) return;
-      facade(stage, {
-        listId: c.playlistId || worshipList(),
-        tag: c.label, btn: c.label + " 영상 보기", label: c.label, caption: !c.playlistId
-      });
+      var byList = function () {
+        facade(stage, {
+          listId: c.playlistId || worshipList(),
+          tag: c.label, btn: c.label + " 영상 보기", label: c.label, caption: !c.playlistId
+        });
+      };
+      if (c.latest) {
+        // 라이브 탭 맨 위 영상 (youtube-latest.json 의 live, GitHub Actions가 10분마다 기록)
+        loadLatest(function (d) {
+          if (d && d.live && d.live.id) {
+            facade(stage, { videoId: d.live.id, tag: c.label, btn: "예배 영상 보기",
+                            label: d.live.title || c.label, captionText: d.live.title });
+          } else byList();
+        });
+      } else byList();
       if (descEl) {
         descEl.innerHTML = "<b>" + esc(c.label) + "</b> · " + esc(c.desc) +
-          (c.playlistId ? "" : " <span>(전용 재생목록이 아직 없어 최신 라이브 예배 영상이 재생됩니다)</span>");
+          (c.playlistId || c.latest ? "" : " <span>(전용 재생목록이 아직 없어 최신 라이브 예배 영상이 재생됩니다)</span>");
       }
     }
     tabsHost.addEventListener("click", function (e) {

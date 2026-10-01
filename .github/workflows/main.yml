@@ -1,9 +1,9 @@
-# 3시간마다 네이버 블로그 "교회사진첩"의 최신 사진 목록을 가져와 홈페이지 갤러리에 반영합니다.
+# 홈페이지 자동 갱신: 10분마다 유튜브 최신 예배 영상·쇼츠와 네이버 블로그 "교회사진첩" 사진을 확인해 반영합니다.
 name: 블로그 사진첩 가져오기
 
 on:
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -17,11 +17,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: 사진 목록 가져오기
+      - name: 유튜브 최신 예배 영상·쇼츠 확인
+        run: python scripts/update_youtube_latest.py
+        continue-on-error: true
+      - name: 블로그 사진 목록 가져오기
         run: python scripts/update_blog_gallery.py
+        continue-on-error: true
       - name: 바뀐 게 있으면 저장
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/data/blog-gallery.json
-          git diff --cached --quiet || (git commit -m "블로그 사진첩 갱신" && git push)
+          git add assets/data/youtube-latest.json assets/data/youtube-shorts.json assets/data/blog-gallery.json
+          git diff --cached --quiet || (git commit -m "홈페이지 자동 갱신" && git push)
